@@ -6,10 +6,10 @@ import org.junit.runners.Parameterized;
 import static org.junit.Assert.*;
 
 @RunWith(Parameterized.class)
-public class LionParametrizedTest {
+public class LionParametrizedPositiveTest {
     private final String sex;
 
-    public LionParametrizedTest(String sex) {
+    public LionParametrizedPositiveTest(String sex) {
         this.sex = sex;
     }
 
@@ -18,13 +18,12 @@ public class LionParametrizedTest {
         return new Object[][] {
                 {"Самец"},
                 {"Самка"},
-                {"Неизвестно"}
         };
     }
 
     @Test
-    public void doesHaveManeCheckResultAndException() throws Exception {
-        try {
+    public void doesHaveManeCheckResult() throws Exception {
+
             Feline feline = new Feline();
             Lion lion = new Lion(sex, feline);
             if (sex.equals("Самец")) {
@@ -32,10 +31,6 @@ public class LionParametrizedTest {
             } else if (sex.equals("Самка")) {
                 assertFalse("Значение должно быть false", lion.doesHaveMane());
             }
-        } catch (Exception exception) {
-            String expectedException = "Используйте допустимые значения пола животного - самец или самка";
-            String actualException = exception.getMessage();
-            assertEquals(expectedException, actualException);
-        }
+
     }
 }
